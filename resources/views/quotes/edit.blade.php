@@ -92,6 +92,23 @@
                                 placeholder="48201">
                         </div>
                     </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Quote Status</label>
+                        <select name="status"
+                            class="w-full rounded-lg border-slate-200 shadow-sm focus:border-brand-500 focus:ring-brand-500 py-2.5 px-4 transition-all duration-200 bg-white">
+                            <option value="Active" {{ $quote->status === 'Active' ? 'selected' : '' }}>Active</option>
+                            <option value="Draft" {{ $quote->status === 'Draft' ? 'selected' : '' }}>Draft</option>
+                            <option value="Sent" {{ $quote->status === 'Sent' ? 'selected' : '' }}>Sent</option>
+                            <option value="Accepted" {{ $quote->status === 'Accepted' ? 'selected' : '' }}>Accepted</option>
+                            <option value="Rejected" {{ $quote->status === 'Rejected' ? 'selected' : '' }}>Rejected</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-1">
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Internal Notes (Optional)</label>
+                        <textarea name="notes" rows="3"
+                            class="w-full rounded-lg border-slate-200 shadow-sm focus:border-brand-500 focus:ring-brand-500 py-2.5 px-4 transition-all duration-200 bg-white"
+                            placeholder="Add any internal notes about this quote...">{{ old('notes', $quote->notes) }}</textarea>
+                    </div>
                 </div>
             </div>
 
@@ -377,6 +394,8 @@
                         city: formData.get('city'),
                         state: formData.get('state'),
                         pincode: formData.get('pincode'),
+                        status: formData.get('status'),
+                        notes: formData.get('notes'),
                         items: rawItems
                     };
 

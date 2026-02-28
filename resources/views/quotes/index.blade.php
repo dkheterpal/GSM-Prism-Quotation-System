@@ -14,6 +14,28 @@
         </a>
     </div>
 
+    <!-- Status Tabs -->
+    <div class="mb-6 border-b border-slate-200 animate-fade-in" style="animation-delay: 0.15s;">
+        <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+            <a href="{{ route('quotes.index', ['status' => 'Active']) }}"
+                class="{{ $currentStatus == 'Active' || $currentStatus == 'active' ? 'border-brand-500 text-brand-600' : 'border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700' }} whitespace-nowrap border-b-2 py-3 px-1 text-sm font-medium transition-colors">
+                <i class="fa-solid fa-circle-check mr-2"></i>Active
+            </a>
+            <a href="{{ route('quotes.index', ['status' => 'all']) }}"
+                class="{{ $currentStatus == 'all' ? 'border-brand-500 text-brand-600' : 'border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700' }} whitespace-nowrap border-b-2 py-3 px-1 text-sm font-medium transition-colors">
+                <i class="fa-solid fa-layer-group mr-2"></i>All
+            </a>
+            <a href="{{ route('quotes.index', ['status' => 'Draft']) }}"
+                class="{{ $currentStatus == 'Draft' ? 'border-brand-500 text-brand-600' : 'border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-700' }} whitespace-nowrap border-b-2 py-3 px-1 text-sm font-medium transition-colors">
+                <i class="fa-solid fa-pen-ruler mr-2"></i>Drafts
+            </a>
+            <a href="{{ route('quotes.index', ['status' => 'deleted']) }}"
+                class="{{ $currentStatus == 'deleted' ? 'border-red-500 text-red-600' : 'border-transparent text-slate-500 hover:border-red-300 hover:text-red-700' }} whitespace-nowrap border-b-2 py-3 px-1 text-sm font-medium transition-colors">
+                <i class="fa-solid fa-trash mr-2"></i>Deleted
+            </a>
+        </nav>
+    </div>
+
     <div class="bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden animate-fade-in"
         style="animation-delay: 0.2s;">
         @if(count($quotes) > 0)
@@ -71,10 +93,25 @@
                                     </div>
                                 </td>
                                 <td class="p-5">
+                                    @php
+                                        $statusClass = 'bg-slate-100 text-slate-600 border-slate-200';
+                                        $statusStr = strtolower($quote->status);
+                                        if ($statusStr === 'active') $statusClass = 'bg-emerald-50 text-emerald-600 border-emerald-200';
+                                        elseif ($statusStr === 'draft') $statusClass = 'bg-amber-50 text-amber-600 border-amber-200';
+                                        elseif ($statusStr === 'sent') $statusClass = 'bg-blue-50 text-blue-600 border-blue-200';
+                                        elseif ($statusStr === 'accepted') $statusClass = 'bg-green-50 text-green-700 border-green-200';
+                                        elseif ($statusStr === 'rejected') $statusClass = 'bg-red-50 text-red-600 border-red-200';
+                                        if ($quote->trashed()) $statusClass = 'bg-slate-100 text-slate-500 border-slate-200 line-through';
+                                    @endphp
                                     <span
-                                        class="capitalize bg-amber-50 text-amber-600 border border-amber-200 rounded-full px-3 py-1 text-xs font-bold tracking-wide shadow-sm">
-                                        <i class="fa-solid fa-circle-dot text-[8px] mr-1 mb-[1px]"></i>{{ $quote->status }}
+                                        class="capitalize {{ $statusClass }} border rounded-full px-3 py-1 text-xs font-bold tracking-wide shadow-sm flex items-center w-fit">
+                                        <i class="fa-solid {{ $quote->trashed() ? 'fa-trash-can' : 'fa-circle-dot' }} text-[8px] mr-1 mb-[1px]"></i>{{ $quote->trashed() ? 'Deleted' : $quote->status }}
                                     </span>
+                                    @if($quote->notes)
+                                        <div class="mt-2 text-xs text-slate-400 group-hover:text-slate-600 transition-colors w-32 truncate" title="{{ $quote->notes }}">
+                                            <i class="fa-regular fa-comment-dots mr-1"></i>{{ $quote->notes }}
+                                        </div>
+                                    @endif
                                 </td>
                                 <td class="p-5 text-right whitespace-nowrap">
                                     <div class="flex items-center justify-end gap-2">
@@ -84,27 +121,39 @@
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
 
-                                        <a href="{{ route('quotes.edit', $quote->id) }}"
-                                            class="inline-flex items-center justify-center w-9 h-9 border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all shadow-sm tooltip"
-                                            title="Edit Quote">
-                                            <i class="fa-solid fa-pencil"></i>
-                                        </a>
+                                        @if(!$quote->trashed())
+                                            <a href="{{ route('quotes.edit', $quote->id) }}"
+                                                class="inline-flex items-center justify-center w-9 h-9 border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all shadow-sm tooltip"
+                                                title="Edit Quote">
+                                                <i class="fa-solid fa-pencil"></i>
+                                            </a>
 
-                                        <a href="{{ route('quotes.download', $quote->id) }}"
-                                            class="inline-flex items-center justify-center w-9 h-9 border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all shadow-sm tooltip"
-                                            title="Download Document">
-                                            <i class="fa-solid fa-file-pdf"></i>
-                                        </a>
+                                            <a href="{{ route('quotes.download', $quote->id) }}"
+                                                class="inline-flex items-center justify-center w-9 h-9 border border-slate-200 text-slate-600 rounded-lg hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all shadow-sm tooltip"
+                                                title="Download Document">
+                                                <i class="fa-solid fa-file-pdf"></i>
+                                            </a>
 
-                                        <form action="{{ route('quotes.destroy', $quote->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this quote?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="inline-flex items-center justify-center w-9 h-9 border border-slate-200 text-slate-600 rounded-lg hover:bg-red-600 hover:text-white hover:border-red-600 transition-all shadow-sm tooltip"
-                                                title="Delete Quote">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </button>
-                                        </form>
+                                            <form action="{{ route('quotes.destroy', $quote->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this quote?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="inline-flex items-center justify-center w-9 h-9 border border-slate-200 text-slate-600 rounded-lg hover:bg-red-600 hover:text-white hover:border-red-600 transition-all shadow-sm tooltip"
+                                                    title="Delete Quote">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('quotes.restore', $quote->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Restore this quote?');">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit"
+                                                    class="inline-flex items-center justify-center w-9 h-9 border border-slate-200 text-slate-600 rounded-lg hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all shadow-sm tooltip"
+                                                    title="Restore Quote">
+                                                    <i class="fa-solid fa-rotate-left"></i>
+                                                </button>
+                                            </form>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

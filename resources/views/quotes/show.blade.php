@@ -30,7 +30,22 @@
             <div class="flex justify-between items-start border-b-2 border-slate-900 pb-6 mb-8">
                 <div>
                     <h1 class="text-4xl font-bold text-slate-900 mb-2">Proposal</h1>
-                    <p class="text-xl text-slate-500 font-mono">{{ $quote->quote_number }}</p>
+                    <div class="flex items-center gap-3">
+                        <p class="text-xl text-slate-500 font-mono">{{ $quote->quote_number }}</p>
+                        @php
+                            $statusClass = 'bg-slate-100 text-slate-600 border-slate-200';
+                            $statusStr = strtolower($quote->status);
+                            if ($statusStr === 'active') $statusClass = 'bg-emerald-50 text-emerald-600 border-emerald-200';
+                            elseif ($statusStr === 'draft') $statusClass = 'bg-amber-50 text-amber-600 border-amber-200';
+                            elseif ($statusStr === 'sent') $statusClass = 'bg-blue-50 text-blue-600 border-blue-200';
+                            elseif ($statusStr === 'accepted') $statusClass = 'bg-green-50 text-green-700 border-green-200';
+                            elseif ($statusStr === 'rejected') $statusClass = 'bg-red-50 text-red-600 border-red-200';
+                            if ($quote->trashed()) $statusClass = 'bg-slate-100 text-slate-500 border-slate-200 line-through';
+                        @endphp
+                        <span class="capitalize {{ $statusClass }} border rounded-full px-3 py-1 text-xs font-bold tracking-wide shadow-sm flex items-center w-fit print:hidden">
+                            <i class="fa-solid {{ $quote->trashed() ? 'fa-trash-can' : 'fa-circle-dot' }} text-[8px] mr-1 mb-[1px]"></i>{{ $quote->trashed() ? 'Deleted' : $quote->status }}
+                        </span>
+                    </div>
                     <p class="text-slate-400 mt-2">Date: {{ $quote->created_at->format('F j, Y') }}</p>
                 </div>
                 <div class="text-right">
@@ -54,6 +69,13 @@
                     @endif
                 </div>
             </div>
+
+            @if($quote->notes)
+                <div class="mb-8 p-5 bg-amber-50 rounded-xl border border-amber-200 text-amber-800 shadow-sm print:hidden">
+                    <h4 class="font-bold mb-1"><i class="fa-solid fa-note-sticky mr-2"></i>Internal Notes</h4>
+                    <p class="text-sm whitespace-pre-wrap">{{ $quote->notes }}</p>
+                </div>
+            @endif
 
             <!-- Investment Summary -->
             <div class="mb-12">

@@ -10,10 +10,23 @@ use App\Models\Price;
 
 class QuoteController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $quotes = Quote::orderBy('created_at', 'desc')->paginate(5);
-        return view('quotes.index', compact('quotes'));
+        $query = Quote::orderBy('created_at', 'desc');
+        $currentStatus = $request->input('status', 'Active');
+
+        if ($currentStatus === 'deleted') {
+            $query->onlyTrashed();
+        } else {
+            // Also allow filtering by specific status if we want
+            if ($currentStatus !== 'all') {
+                $query->where('status', $currentStatus);
+            }
+        }
+
+        $quotes = $query->paginate(5)->withQueryString();
+
+        return view('quotes.index', compact('quotes', 'currentStatus'));
     }
 
     public function create()
@@ -60,7 +73,8 @@ class QuoteController extends Controller
             'phone' => $request->phone,
             'city' => $request->city,
             'state' => $request->state,
-            'pincode' => $request->pincode,
+            'status' => 'Active',
+            'notes' => $request->notes,
         ]);
 
         foreach ($request->items as $item) {
@@ -76,7 +90,7 @@ class QuoteController extends Controller
 
     public function show($id)
     {
-        $quote = Quote::with(['items.product', 'items.price'])->findOrFail($id);
+        $quote = Quote::with(['items.product', 'items.price'])->withTrashed()->findOrFail($id);
 
         $uniqueProducts = collect();
         foreach ($quote->items as $item) {
@@ -104,7 +118,7 @@ class QuoteController extends Controller
 
     public function edit($id)
     {
-        $quote = Quote::with('items.product', 'items.price')->findOrFail($id);
+        $quote = Quote::with('items.product', 'items.price')->withTrashed()->findOrFail($id);
         return view('quotes.edit', compact('quote'));
     }
 
@@ -118,9 +132,11 @@ class QuoteController extends Controller
             'items.*.product_id' => 'required|exists:products,id',
             'items.*.price_id' => 'required|exists:prices,id',
             'items.*.quantity' => 'required|integer|min:1',
+            'status' => 'required|string',
+            'notes' => 'nullable|string',
         ]);
 
-        $quote = Quote::findOrFail($id);
+        $quote = Quote::withTrashed()->findOrFail($id);
 
         $logoPath = $quote->company_logo;
         if ($request->filled('company_logo_base64')) {
@@ -150,6 +166,8 @@ class QuoteController extends Controller
             'city' => $request->city,
             'state' => $request->state,
             'pincode' => $request->pincode,
+            'status' => $request->status,
+            'notes' => $request->notes,
         ]);
 
         // Re-create items matching how it was built
@@ -169,7 +187,16 @@ class QuoteController extends Controller
     {
         $quote = Quote::findOrFail($id);
         $quote->delete();
-        return redirect()->route('quotes.index')->with('success', 'Quote deleted successfully.');
+        return redirect()->route('quotes.index', ['status' => 'active'])->with('success', 'Quote moved to deleted correctly.');
+    }
+
+    public function restore($id)
+    {
+        $quote = Quote::onlyTrashed()->findOrFail($id);
+        $quote->restore();
+        // optionally reset status back to active when restored?
+        $quote->update(['status' => 'Active']);
+        return redirect()->route('quotes.index', ['status' => 'deleted'])->with('success', 'Quote restored successfully.');
     }
 
     public function download($id)

@@ -88,6 +88,12 @@
                                 placeholder="48201">
                         </div>
                     </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Internal Notes (Optional)</label>
+                        <textarea name="notes" rows="3"
+                            class="w-full rounded-lg border-slate-200 shadow-sm focus:border-brand-500 focus:ring-brand-500 py-2.5 px-4 transition-all duration-200 bg-white"
+                            placeholder="Add any internal notes about this quote..."></textarea>
+                    </div>
                 </div>
             </div>
 
@@ -353,6 +359,7 @@
                         city: formData.get('city'),
                         state: formData.get('state'),
                         pincode: formData.get('pincode'),
+                        notes: formData.get('notes'),
                         items: rawItems
                     };
 
