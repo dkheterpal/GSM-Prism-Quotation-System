@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->enum('type', ['Fixed', 'SaaS', 'HaaS']);
+            $table->enum('type', ['Fixed', 'SaaS', 'HaaS', 'Included']);
             $table->decimal('setup_fee', 10, 2)->default(0);
             $table->decimal('monthly_fee', 10, 2)->default(0);
             $table->integer('term_months')->nullable();

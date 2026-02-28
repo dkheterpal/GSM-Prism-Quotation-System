@@ -1,0 +1,400 @@
+
+
+Vehicle Inspection Solution
+Pre-Proposal
+Dated: December ‘25
+
+
+
+Submitted to
+
+
+
+
+
+
+
+
+Submitted by
+
+Somerset, NJ 08902
+Tel:  (732) 357 8600
+
+Proposal Overview
+Sphere Global – Customized Damage Prevention Solution for GM
+
+This proposal presents a comprehensive, customized solution developed by Sphere Global to address General Motors’ need for enhanced damage prevention, inspection, and data visibility across its vehicle logistics ecosystem. The proposed solution leverages Sphere’s advanced PRISM product suite — a family of AI-driven, vision-based inspection technologies — specifically tailored to meet GM’s operational workflows at key handoff points such as production exit, dispatch yards, release gates, and dealerships.
+
+Sphere Global has extensive experience building and deploying intelligent inspection systems for global customers, logistics providers, and port operators. The PRISM solution is designed to be modular, scalable, and seamlessly integrable into GM’s existing systems and infrastructure. With this deployment, GM will gain near real-time inspection data, high-resolution vehicle imagery, automated damage detection, and a centralized portal for holistic oversight and auditing — significantly reducing claims, disputes, and downstream operational friction.
+Scope of the Solution
+The proposed solution can deliver high-resolution, multi-angle vehicle imaging and automated damage detection capabilities at each stage of GM’s finished vehicle logistics process. The solution will consist of the following integrated PRISM components:
+PRISM POD: A fixed outdoor system for automated inspections in dispatch and storage yards
+PRISM TUNL: An indoor line-mounted solution for image capture at the production exit (Care Line)
+PRISM ARCH: Overhead gate-based capture at vehicle release points
+PRISM Mobile App: A mobile inspection tool for Logistics Service Providers (LSPs) and dealer personnel
+PRISM Portal: A centralized cloud-based platform that aggregates images, video, AI detection logs, and inspection history
+
+The proposed solution can deliver a modular and customizable vehicle inspection platform to support GM’s finished vehicle logistics operations. The scope includes — but is not limited to — the following capabilities, which will be tailored based on GM’s specific site conditions, operational workflows, and compliance requirements:
+Comprehensive Vehicle Imaging: High-resolution image and video capture from multiple angles — including underbody imaging where applicable — to establish a visual record of vehicle condition at critical transition points.
+AI-Based Damage Detection: Automated identification and classification of visible defects such as scratches, dents, dings, scuffs, and cracks using trained AI vision models, where AI-based detection is feasible.
+VIN and Event Metadata Tagging: Intelligent tagging of inspection records with vehicle identifiers (VIN), timestamps, and event-specific metadata, if such data is available or implemented.
+System Integration: Seamless API-driven integration with GM’s enterprise systems, including but not limited to claims management, quality assurance, logistics tracking, and operations visibility platforms.
+Data Retention & Storage: Secure retention of all captured media and inspection data for the duration specified by GM policies. Older media assets can be archived to GM-controlled cloud environments (e.g., Azure Blob, AWS S3) as needed.
+Security & Access Controls: Role-based access is enforced across all components of the solution. External user access is restricted unless specifically prescribed by GM. Each deployment maintains strict data isolation and ensures GM retains full control of cloud tenancy and permissions.
+Hardware & Software Customization: Every deployment — whether POD, TUNL, ARCH, or Mobile — includes full-stack customization of on-prem hardware (provided by GM), software, AI models (where applicable), and configuration. The solution is delivered as a turnkey system, pre-integrated, calibrated, and tested to align with the requirements of each individual GM site.
+
+This scope is intended to be flexible and extensible, with additional modules or capabilities deployable in future phases or locations based on evolving operational needs and feedback.
+
+PRISM POD
+Sphere Global proposes the deployment of the PRISM POD — a fully enclosed, AI-powered, fixed-camera inspection solution designed to automate and enhance the damage detection process for vehicles at GM yards.
+
+The PRISM POD consists of a custom-designed smart structure equipped with high-resolution, high-frame-rate imaging systems and GM provided on-premise hardware for AI-powered detection. It captures detailed images of every vehicle — including optional underbody views — as it passes through the structure, identifying visible damages such as dents, scratches, cracks, and scuffs. Where required, manual review or annotation is available to supplement AI-based detection.
+
+Each POD installation is customized to the operational requirements and process flow of the specific GM yard, taking into account lane widths, lighting conditions, traffic patterns, and vehicle types. The solution is delivered as a turnkey system — inclusive of physical infrastructure, imaging hardware, AI processing equipment, software access, and integration with GM’s broader logistics or claims systems.
+
+Optional accessories — such as high-speed roll-up doors, air curtains, and heated flooring — can be included to ensure environmental control and imaging consistency in regions with high wind, dust, or low temperatures. These accessories are offered where applicable and based on site-specific needs.
+
+
+
+An illustration of the PRISM POD (subject to change based on specifications)
+
+Proposed Deliverables
+The following deliverables are included in the proposed PRISM POD installation:
+Custom Engineered POD Structure: Designed and fabricated to meet GM site specifications and throughput requirements.
+High-Definition Imaging System: Multiple high-frame-rate cameras for 360° vehicle coverage (top, sides, rear).
+Optional Underbody Camera: Integrated solution to capture high-quality undercarriage images where required.
+AI Processing Server (On-Premise): Local server infrastructure for real-time AI processing and damage tagging.
+Secure Image Capture and Storage Infrastructure: Ruggedized hardware for high-throughput image processing and retention (Described further in the technology section of the document)
+Cloud-Hosted Prism Web Portal License: Access to Sphere’s centralized inspection management platform with role-based access (Described further in the technology section of the document).
+On-Site Support Services: Deployment assistance, solution training, and initial annotation support to ensure accuracy and user adoption.
+Hybrid Maintenance Plan: Combination of remote proactive diagnostics and on-prem preventive maintenance, with documented scheduling for daily, weekly, and monthly upkeep.
+Warranty and SLA Coverage: Comprehensive hardware and software coverage, including escalation paths and issue resolution timelines.
+Project Timeline
+Below is the indicative project timeline for the POD deployment. Final dates defined post site survey and requirements finalization.
+Phase
+Timeline (Approx.)
+Key Activities
+Requirements Finalization
+Week 0–2
+Site visit, layout analysis, accessory selection, and final specs approval
+Fabrication & Assembly
+Week 3–8
+POD structure fabrication, camera calibration, hardware integration
+Delivery & Installation
+Week 9–12
+Transport to site, physical install, network and power provisioning
+System Configuration
+Week 13
+Calibration, connectivity, data routing, and software configuration
+Testing & Training
+Week 14
+UAT, performance validation, user training
+Go-Live
+Week 14
+Handover to GM operations, monitoring begins
+Sphere ensures close collaboration throughout every phase to align with GM’s logistics and operations teams.
+
+PRISM TUNL – Care Line Inspection Solution
+Sphere Global proposes the deployment of the PRISM TUNL, a purpose-built, intelligent tunnel structure designed for inline vehicle inspection at the Care Line or other end-of-line checkpoints. The solution enables fast, reliable, and consistent capture of high-resolution images and videos of each vehicle as it passes through the tunnel—helping identify potential quality issues before vehicles leave the plant.
+
+Each TUNL system is customized to meet the operational workflow, vehicle flow, space constraints, and quality control objectives of the installation site. Optional enhancements include an underbody camera module, a Gap & Flush inspection module for panel alignment verification, and accessory features such as air curtains, heated floors, and high-speed doors, which may be added based on plant-specific environmental and operational requirements.
+
+The TUNL is designed for durability in high-throughput environments and includes all necessary imaging infrastructure and hardware to support high-speed inspections. It also integrates with PRISM’s broader ecosystem, enabling centralized review, analysis, and decision support across multiple facilities.
+An illustration of the Prism TUNL is provided below. The final product will be tailored to site-specific needs and available space.
+
+Illustration: PRISM TUNL (Final configuration subject to site requirements)
+
+Proposed Deliverables
+Sphere Global will supply and configure the following for the PRISM TUNL implementation:
+Custom-Fabricated TUNL Structure tailored to the specific installation site
+High-Speed, High-Resolution Camera Arrays capturing detailed imagery from multiple angles
+Integrated Lighting & Sensors to ensure uniform image quality under all lighting conditions
+Underbody Camera Module (Optional) for bottom-side imaging of vehicles
+Gap & Flush Inspection Module (Optional) to assess panel fit, alignment, and uniformity
+Control Panel & PLC Integration for system synchronization with production flow
+Infrastructure & Hardware including enclosures, mounts, cabling, and power distribution
+Software & Interface Licenses to support image capture, annotation, and workflow management (Details in Technology Section)
+Accessories (Optional) such as air curtains, heated flooring, and industrial doors based on site needs
+Installation Supervision including structural setup, alignment, and equipment calibration
+System Commissioning and test validation on-site
+User Training through a train-the-trainer program
+Support, Warranty, and Maintenance Services to ensure uninterrupted operation (Detailed in Service Section)
+
+Project Timeline
+Sphere Global anticipates full delivery and commissioning of the PRISM TUNL within 100 to 120 days from project initiation. Key milestones include:
+Phase
+Timeline (Approx.)
+Key Activities
+Project Kickoff
+Weeks 1–2
+Site surveys, requirement finalization, detailed planning
+Fabrication & Assembly
+Weeks 3–8
+Structure manufacturing, camera integration, pre-shipment testing
+Delivery & Installation
+Weeks 9–12
+Site delivery, physical install, electrical setup, calibration
+Testing & Commissioning
+Weeks 12–14
+Image capture validation, workflow testing, user signoff
+Proving Phase & Optimization
+Weeks 15–20
+Operational monitoring, system tuning, performance validation
+This includes a proving phase post-installation to fine-tune the system and validate performance under live production conditions.
+
+
+PRISM ARCH – Gate Inspection
+Sphere Global proposes the PRISM ARCH, a compact, high-performance inspection structure engineered specifically for Check-In and Check-Out gate applications—where real estate is limited and vehicle flow is constrained. The ARCH is ideal for inbound/outbound inspection points such as shipping yards, storage depots, and handoff zones between logistics providers.
+
+The ARCH enables automated image capture as vehicles pass beneath, documenting vehicle condition with minimal disruption to existing flow. Each deployment is customized based on the customer’s location layout, throughput requirements, and inspection objectives. The system is optimized for constrained environments while still offering full image coverage, with optional accessories based on site-specific needs.
+
+Illustration: PRISM ARCH (Final configuration subject to project specifications)
+
+Proposed Deliverables
+Sphere Global will deliver the following components as part of the PRISM ARCH implementation:
+Custom-Designed PRISM ARCH Structure to fit the spatial constraints of the target gate location
+High-Speed, High-Resolution Camera Arrays for side, front, and rear capture
+Underbody Camera Module (Optional) for undercarriage inspection
+Integrated Lighting to maintain image quality under varying daylight or night conditions
+All Required Hardware & Infrastructure, including mounts, cabling, and processing units
+Software Licenses & Interfaces for image capture, workflow management, and user access (Described in Technology Section)
+Accessories (Optional) such as air curtains or heated pads for winter operation
+Installation Supervision for physical setup and calibration
+System Commissioning including operational verification and test capture cycles
+User Training and basic usage documentation
+Ongoing Support, Warranty, and Maintenance (Outlined in Service Section)
+
+Project Timeline
+Sphere Global estimates a delivery timeline of approximately 90 to 110 days from project kickoff. Key project phases include:
+Phase
+Timeline (Approx.)
+Key Activities
+Project Initiation
+Weeks 1–2
+Kickoff, site walkthrough, space and traffic flow analysis
+Fabrication & Integration
+Weeks 3–7
+ARCH frame build, camera installation, and infrastructure prep
+Delivery & Installation
+Weeks 8–10
+Site delivery, on-ground setup, and equipment configuration
+System Commissioning
+Weeks 10–12
+Image capture verification and system testing
+Operational Go-Live
+Weeks 13–15
+Full system use with monitoring and fine-tuning
+An additional proving and adjustment period will follow installation to ensure accuracy, consistency, and alignment with GM’s operational flow.
+
+PRISM Mobile App – Inspection & Handover Workflow
+Sphere Global proposes the PRISM Mobile App, a versatile, end-to-end vehicle movement and inspection tracking system designed for seamless use by dealers, road haulers, LSPs, and rail operators throughout the vehicle’s journey—from assembly plant to final dealership handover.
+By scanning the Vehicle Identification Number (VIN) at each stage, users are guided through a customized inspection process that supports compliance, damage recording, and secure chain of custody. The system allows for fully configurable workflows aligned with each OEM’s policies, ensuring that required inspection steps are dynamically displayed based on vehicle status, location, or handoff type.
+
+
+                          
+Illustrative screenshots of the Prism Mobile App interface.
+
+Proposed Deliverables
+Sphere will deliver the following capabilities through the Prism Mobile App solution:
+Secure User Authentication: Login tracking ensures accountability of all inspections
+VIN-Driven Workflow: Unique inspections triggered by VIN scan; supports barcode and OCR scanning
+Location & Time Stamping: Automatic GPS capture and weather logging to support claims and audit trails
+Real-Time Damage Annotation: Users can photograph, tag, and annotate damage directly within the app
+Video & Image Capture: Records full inspection events with media upload to centralized system
+Customizable Inspection Checklists: Tailored steps based on manufacturer, location, or vehicle type
+Live Alerts & Reporting: Damage reports can be instantly routed to GM’s claims or logistics teams
+Integration with Prism Ecosystem: Links with fixed-site Prism installations to create a continuous damage visibility pipeline
+
+The Prism Mobile App significantly improves visibility, traceability, and accountability across the vehicle distribution chain, enabling faster dispute resolution, reduced claim cycle times, and enhanced quality assurance across all transfer points.
+
+
+Technology Architecture
+The Prism solution is built on a hybrid architecture combining on-premise processing with cloud-based data aggregation and analytics, ensuring maximum flexibility, performance, and scalability for enterprise customers such as General Motors (GM). The architecture supports seamless deployment across a variety of operational footprints, including PRISM POD, TUNL, and ARCH, as well as mobile inspection environments.
+
+
+On-Premise System Components
+Each Prism installation includes an on-premise system stack responsible for real-time data acquisition, processing, and — where applicable — AI-based damage detection. Key components include:
+High-Resolution Camera Arrays (visible, underbody, and specialty optics as applicable)
+Edge Processing Units for real-time video analysis and inference
+Local Database & Application Server to store, tag, and sync inspection data
+On-Prem AI Engine trained on OEM-specific vehicle imagery for high-accuracy detection
+Hardware infrastructure (servers, networking, power backup, etc.) is to be provisioned by GM at each site.
+Sphere Global licenses and supports the on-premise software component, including AI modules and system application.
+Cloud-Based Prism Platform
+All validated media and metadata from on-premise systems are securely synchronized to the Prism Cloud Platform, hosted on AWS infrastructure. Key features of the Prism Cloud solution include:
+Multi-Tenant Architecture: Each enterprise customer operates within their own logically isolated tenant, ensuring data segregation, security, and compliance.
+Customer-Owned Tenancy: GM will retain full ownership of its Prism cloud tenant, with the ability to manage user access, configure retention policies, and audit activity logs.
+Transparent Cost Structure: Cloud infrastructure costs (e.g., compute, storage, backups) are borne by GM and fully visible through standard AWS billing dashboards.
+Data Archival & Backup: Customers may choose to archive historical data to their own cloud storage (e.g., Azure Blob, AWS S3) with automated backup workflows supported.
+Software Licensing and Updates
+All Prism software components — including the on-premise application, AI models, and cloud portal — are licensed, maintained, and updated by Sphere Global. Updates include:
+Security patches
+Model retraining and performance tuning
+Feature enhancements
+API version control
+Integration and Extensibility
+Prism is designed as an open and extensible platform, capable of integrating with GM’s internal systems as well as third-party tools. This includes:
+Claims & Warranty Systems
+Enterprise Logistics Platforms
+Quality Inspection Tools
+BI & Reporting Dashboards
+The Prism Cloud Platform exposes a robust library of Open REST APIs, allowing secure, role-based integration without additional licensing or professional services fees. 
+
+Support, Warranty, and Maintenance Services
+Sphere Global is committed to ensuring continuous, high-performance operation of the Prism solution across all deployment types — including PRISM POD, TUNL, ARCH, and Mobile. Our post-deployment support structure is built on three pillars: Warranty, Support, and Maintenance. Each pillar is designed to deliver maximum uptime, proactive monitoring, and rapid incident response.
+Warranty
+Sphere offers an industry-leading 60-month comprehensive warranty covering all hardware and software supplied under this solution. The warranty includes:
+Full repair, replacement, and service coverage
+Minimal downtime assurance with rapid diagnostics and component swap
+Loaner equipment to minimize service disruption during part replacement
+Complete parts and labor support for any system failure not caused by external misuse
+This worry-free warranty provides GM with a performance-guaranteed solution backed by expert support and tangible operational reliability.
+Support
+Sphere’s support services are structured to provide priority response, remote troubleshooting, and onsite intervention when required. Our support offering includes but is not limited to:
+Emergency help desk support with response within 4 to 8 business hours
+Remote diagnostics and troubleshooting
+Service calls and parts replacement for covered components
+Loaner hardware availability to minimize operational interruptions
+Limited after-hours support, as needed
+This high-availability support model ensures any potential service-impacting issue is swiftly resolved to maintain GM’s operational continuity.
+Software License and Updates
+All Prism software (on-premise and cloud) is provided as a licensed service managed by Sphere Global. The license includes:
+Regular feature enhancements and security patches
+OS and third-party application updates as part of the software lifecycle
+Portal and AI model upgrades delivered remotely and seamlessly
+Failover and recovery assurance to minimize data loss in the event of hardware issues
+GM’s deployed systems will benefit from Sphere’s continuous improvement roadmap, with no additional costs for minor version upgrades and vulnerability patches.
+Preventive Maintenance
+Sphere performs structured daily, weekly, and monthly maintenance activities to ensure sustained system health and high accuracy of damage detection. In addition to remote monitoring, on-site preventive maintenance visits will be scheduled and include:
+Cleaning and inspection of all cameras, controllers, and peripherals
+Inspection and testing of dome housings, heaters, and blowers
+Verification of camera focus, positioning, and field-of-view integrity
+Power supply testing, including UPS and battery backup health checks
+Review of software logs, programming settings, and diagnostic alerts
+Functional testing of software operations and data capture integrity
+All maintenance tasks are documented and tracked in a centralized support portal for transparency and audit readiness.
+
+
+
+
+
+
+
+
+Hardware Cost - Capital
+Based on the current understanding and the variables discussed Sphere proposes the following costing model. 
+Capital Cost
+Cost 
+Actual Cost
+Qty
+SaaS /mt 60 Month Term
+One off Site  license
+$1
+$1
+1
+
+Prism POD:
+Setup, Configuration
+$1
+$1
+1
+$1
+Underbody Camera
+$1
+$1
+
+$1
+Prism TUNL - Damage Detection& Spec Check
+$1
+$1
+1
+$1
+Prism TUNL - Gap & Flush
+$1
+$1
+1
+$1
+Prism Arch:
+Setup, Configuration 
+$1
+$1
+1
+$1*
+Prism Mobile App                                                     Enterprise software License
+Data Retention on GM Storage
+Unlimited Users
+$0
+$1
+1
+$1
+* No AI with this model at this moment in time but if required this price would increase to $99/ Month
+Note:
+Delivery & Installation on actuals and dependent on location and Unions
+Proposed cost does not include AWS Cloud Tenant cost. GM to have admin access to the tenant account and cost on actuals. 
+Image and videos can be backed up/archived on GM cloud if necessary. GM to own all images and videos.
+
+Hardware Cost - Lease to Buy
+Cost per Product
+Cost 
+HaaS
+SaaS
+Term
+One off Site license
+$2
+
+
+One time
+Prism TUNL - Damage Detection& Spec Check - * Interest Rate of 8%
+$2
+$2
+$2
+60 Months
+Prism TUNL - Gap & Flush * - Interest rate of 8%
+$2
+$2
+$2
+60 Months
+Prism Arch
+Setup, Configuration *
+Interest rate of 8%
+$2
+$2
+$2 **
+60 Months
+Prism Mobile App                                                                                         Enterprise software License
+Data retention on GM servers
+Unlimited Users
+
+
+$2**
+60 months
+* Interest on the system over the 5-year lease to buy
+** After 5 years new contract to be drawn
+Note:
+Delivery & Installation Dependent on location and Unions
+Proposed cost does not include AWS Cloud Tenant cost. GM to have admin access to the tenant account and cost on actuals. 
+Image and videos can be back up/archives on GM cloud if necessary. GM to own all images and videos.
+
+Assumptions and Dependencies
+Customer to provide access to the facility for setup, configuration and day to day operations.
+Customer to provide power and data (sufficient bandwidth).
+Customer to provide foundational base to install solutions.
+Vendor will not be responsible for any structural modifications, changes or construction apart from the solution and its related builds
+Customer to provide VIN number of the vehicle in a real-time basis in a mutually agreed upon format.
+Damages to cameras, structure or any part of the solution caused by accidents or acts of God, will not be covered.
+
+
+
+
+
+
+<Cover Page>
+<Intro>
+<Product> - dynamic
+<Product> - dynamic
+<Product> - dynamic
+<Product> - dynamic
+<Product> - dynamic
+<Tech>
+<Pricing> - dynamic
+<Assumption>

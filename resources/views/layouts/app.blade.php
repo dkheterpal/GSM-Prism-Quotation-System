@@ -21,12 +21,12 @@
                     },
                     colors: {
                         brand: {
-                            50: '#f0fdfa',
-                            100: '#ccfbf1',
-                            500: '#14b8a6',
-                            600: '#0d9488',
-                            900: '#134e4a',
-                            950: '#042f2e',
+                            50: '#f6f6f6',
+                            100: '#e7e7e7',
+                            500: '#333333',
+                            600: '#000000',
+                            900: '#000000',
+                            950: '#000000',
                         },
                         dark: {
                             800: '#1e293b',
@@ -69,25 +69,24 @@
 </head>
 
 <body class="min-h-screen bg-slate-50 flex flex-col">
-    <!-- Navbar -->
     <nav class="sticky top-0 z-50 glass shadow-sm py-4 border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div
-                    class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-500/30">
-                    <i class="fa-solid fa-gem"></i>
-                </div>
-                <div>
-                    <h1 class="text-xl font-bold text-slate-900 tracking-tight">PRISM</h1>
-                    <p class="text-xs text-brand-600 font-medium tracking-wider uppercase">Proposal System</p>
-                </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-3 items-center">
+            <div class="flex items-center justify-start">
+                <img src="{{ url('/images/products/image11.png') }}" alt="Sphere Global"
+                    class="h-10 hover:opacity-90 transition-opacity">
             </div>
-            <div class="flex items-center gap-4">
+            <div class="flex flex-col items-center justify-center text-center">
+                <h1 class="text-xl font-bold text-slate-900 tracking-tight">PRISM</h1>
+                <p class="text-[10px] sm:text-xs text-slate-600 font-bold tracking-widest uppercase">Proposal System</p>
+            </div>
+            <div class="flex items-center justify-end gap-3 sm:gap-4">
+                <a href="{{ route('products.index') }}"
+                    class="hidden sm:block text-slate-500 hover:text-slate-900 font-medium transition-colors px-2 py-2">Products</a>
                 <a href="{{ route('quotes.index') }}"
-                    class="text-slate-500 hover:text-slate-900 font-medium transition-colors px-3 py-2">Dashboard</a>
+                    class="hidden sm:block text-slate-500 hover:text-slate-900 font-medium transition-colors px-2 py-2">Quotes</a>
                 <a href="{{ route('quotes.create') }}"
-                    class="bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-all shadow-md hover:shadow-lg flex items-center gap-2">
-                    <i class="fa-solid fa-plus"></i> New Quote
+                    class="bg-slate-900 hover:bg-slate-800 text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-sm font-semibold transition-all shadow-md hover:shadow-lg flex items-center gap-2">
+                    <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">New Quote</span>
                 </a>
             </div>
         </div>

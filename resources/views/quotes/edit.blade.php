@@ -1,21 +1,22 @@
 @extends('layouts.app')
-@section('title', 'Create Quote')
+@section('title', 'Edit Quote')
 
 @section('content')
-    <div class="max-w-4xl mx-auto align-middle animate-fade-in" style="animation-delay: 0.1s;">
+    <div class="max-w-4xl mx-auto flex flex-col items-stretch space-y-6">
         <div class="mb-6 flex flex-col gap-2 mt-4">
             <a href="{{ route('quotes.index') }}"
                 class="text-slate-500 text-sm font-medium hover:text-slate-900 hover:underline inline-flex items-center gap-2 transition-colors w-fit">
                 <i class="fa-solid fa-arrow-left"></i> Back to Quotes
             </a>
             <h2 class="text-3xl font-bold tracking-tight text-slate-900 border-b-4 border-slate-900 pb-2 w-fit">
-                Create New Quote
+                Edit Quote
             </h2>
         </div>
 
-        <form id="quote-form" action="{{ route('quotes.store') }}" method="POST"
+        <form id="quote-form" action="{{ route('quotes.update', $quote->id) }}" method="POST"
             class="bg-white rounded-2xl shadow-xl shadow-slate-200/50 overflow-visible border border-slate-100 flex flex-col space-y-0">
             @csrf
+            @method('PUT')
 
             <!-- Header Section -->
             <div class="p-8 border-b border-slate-100 bg-slate-50/50 rounded-t-2xl">
@@ -27,12 +28,14 @@
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Customer Contact Name *</label>
                         <input type="text" name="customer_name" required
+                            value="{{ old('customer_name', $quote->customer_name) }}"
                             class="w-full rounded-lg border-slate-200 shadow-sm focus:border-brand-500 focus:ring-brand-500 py-2.5 px-4 transition-all duration-200 bg-white"
                             placeholder="e.g. John Doe">
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Company Name *</label>
                         <input type="text" name="company_name" required
+                            value="{{ old('company_name', $quote->company_name) }}"
                             class="w-full rounded-lg border-slate-200 shadow-sm focus:border-brand-500 focus:ring-brand-500 py-2.5 px-4 transition-all duration-200 bg-white"
                             placeholder="e.g. General Motors">
                     </div>
@@ -42,8 +45,9 @@
                             <input type="hidden" name="company_logo_base64" id="company_logo_base64">
                             <input type="file" id="company_logo_input" accept="image/*"
                                 class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100 transition-all border border-slate-200 rounded-lg bg-white" />
-                            <div id="logo-preview-container" class="hidden relative">
-                                <img id="logo-preview" src="#" class="h-12 w-auto object-contain border rounded shadow-sm">
+                            <div id="logo-preview-container" class="{{ $quote->company_logo ? '' : 'hidden' }} relative">
+                                <img id="logo-preview" src="{{ $quote->company_logo ? url($quote->company_logo) : '#' }}"
+                                    class="h-12 w-auto object-contain border rounded shadow-sm">
                                 <button type="button" id="remove-logo"
                                     class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs hover:bg-red-600"><i
                                         class="fa-solid fa-times"></i></button>
@@ -52,38 +56,38 @@
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>
-                        <input type="email" name="email"
+                        <input type="email" name="email" value="{{ old('email', $quote->email) }}"
                             class="w-full rounded-lg border-slate-200 shadow-sm focus:border-brand-500 focus:ring-brand-500 py-2.5 px-4 transition-all duration-200 bg-white"
                             placeholder="contact@company.com">
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Phone</label>
-                        <input type="text" name="phone"
+                        <input type="text" name="phone" value="{{ old('phone', $quote->phone) }}"
                             class="w-full rounded-lg border-slate-200 shadow-sm focus:border-brand-500 focus:ring-brand-500 py-2.5 px-4 transition-all duration-200 bg-white"
                             placeholder="(555) 123-4567">
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Address</label>
-                        <input type="text" name="address"
+                        <input type="text" name="address" value="{{ old('address', $quote->address) }}"
                             class="w-full rounded-lg border-slate-200 shadow-sm focus:border-brand-500 focus:ring-brand-500 py-2.5 px-4 transition-all duration-200 bg-white"
                             placeholder="123 Main St">
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">City</label>
-                        <input type="text" name="city"
+                        <input type="text" name="city" value="{{ old('city', $quote->city) }}"
                             class="w-full rounded-lg border-slate-200 shadow-sm focus:border-brand-500 focus:ring-brand-500 py-2.5 px-4 transition-all duration-200 bg-white"
                             placeholder="Detroit">
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-semibold text-slate-700 mb-2">State</label>
-                            <input type="text" name="state"
+                            <input type="text" name="state" value="{{ old('state', $quote->state) }}"
                                 class="w-full rounded-lg border-slate-200 shadow-sm focus:border-brand-500 focus:ring-brand-500 py-2.5 px-4 transition-all duration-200 bg-white"
                                 placeholder="MI">
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-slate-700 mb-2">PIN / Zip</label>
-                            <input type="text" name="pincode"
+                            <input type="text" name="pincode" value="{{ old('pincode', $quote->pincode) }}"
                                 class="w-full rounded-lg border-slate-200 shadow-sm focus:border-brand-500 focus:ring-brand-500 py-2.5 px-4 transition-all duration-200 bg-white"
                                 placeholder="48201">
                         </div>
@@ -117,7 +121,7 @@
                 <a href="{{ route('quotes.index') }}"
                     class="px-6 py-2.5 rounded-lg border border-slate-300 font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-800 transition-colors">Cancel</a>
                 <button type="submit" id="submit-btn"
-                    class="bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 px-8 rounded-lg shadow min-w-[160px] flex items-center justify-center transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                    class="bg-slate-900 hover:bg-slate-800 w-full sm:w-auto text-white font-bold py-2.5 px-8 rounded-lg shadow min-w-[160px] flex items-center justify-center transition-all disabled:opacity-50 disabled:cursor-not-allowed">
                     Generate/Update Proposal
                 </button>
             </div>
@@ -220,20 +224,28 @@
                     logoPreviewContainer.classList.add('hidden');
                 }
 
+                // Initial DB Items
+                const initialItems = @json($quote->items);
+
                 // Fetch initial products
                 fetch('/api/products')
                     .then(res => res.json())
                     .then(data => {
                         productsList = data;
-                        // Add first row by default
-                        addRow();
+                        if (initialItems.length > 0) {
+                            initialItems.forEach(item => {
+                                addRow(item.product_id, item.price_id, item.quantity);
+                            });
+                        } else {
+                            addRow();
+                        }
                     })
                     .catch(err => {
                         console.error('Failed to load products');
                         alert('Failed to load products.');
                     });
 
-                function addRow() {
+                function addRow(initProductId = null, initPriceId = null, initQty = 1) {
                     if (emptyState) emptyState.style.display = 'none';
 
                     const clone = template.content.cloneNode(true);
@@ -244,6 +256,9 @@
                     selects.forEach(el => {
                         el.name = el.name.replace('__INDEX__', itemIndex);
                     });
+
+                    // Populate qty if init
+                    row.querySelector('input[type="number"]').value = initQty;
 
                     // Populate products dropdown
                     const productSelect = row.querySelector('.product-select');
@@ -256,9 +271,12 @@
 
                     // Handle Product Selection Change -> Load Prices
                     productSelect.addEventListener('change', function (e) {
-                        const pId = e.target.value;
-                        const priceSelect = row.querySelector('.price-select');
-                        const spinner = row.querySelector('.price-spinner');
+                        loadPrices(e.target.value, row);
+                    });
+
+                    function loadPrices(pId, rowElem, selectedPriceId = null) {
+                        const priceSelect = rowElem.querySelector('.price-select');
+                        const spinner = rowElem.querySelector('.price-spinner');
 
                         priceSelect.innerHTML = '<option value="">-- Choose Price Type --</option>';
                         priceSelect.disabled = true;
@@ -266,13 +284,11 @@
                         if (!pId) return;
 
                         spinner.classList.remove('hidden');
-                        // priceSelect.classList.add('pl-10'); // adjust padding
 
                         fetch(`/api/products/${pId}/prices`)
                             .then(res => res.json())
                             .then(prices => {
                                 spinner.classList.add('hidden');
-                                // priceSelect.classList.remove('pl-10');
                                 priceSelect.disabled = false;
 
                                 prices.forEach(price => {
@@ -284,12 +300,20 @@
                                     opt.textContent = text;
                                     priceSelect.appendChild(opt);
                                 });
+
+                                if (selectedPriceId) {
+                                    priceSelect.value = selectedPriceId;
+                                }
                             })
                             .catch(() => {
                                 spinner.classList.add('hidden');
-                                // priceSelect.classList.remove('pl-10');
                             });
-                    });
+                    }
+
+                    if (initProductId) {
+                        productSelect.value = initProductId;
+                        loadPrices(initProductId, row, initPriceId);
+                    }
 
                     // Remove row logic
                     row.querySelector('.remove-item').addEventListener('click', function () {
@@ -356,14 +380,14 @@
                         items: rawItems
                     };
 
-                    fetch('{{ route('quotes.store') }}', {
+                    fetch('{{ route('quotes.update', $quote->id) }}', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                             'Accept': 'application/json',
                             'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
                         },
-                        body: JSON.stringify(fetchBody)
+                        body: JSON.stringify({ ...fetchBody, _method: 'PUT' })
                     })
                         .then(async res => {
                             if (!res.ok) {
@@ -389,7 +413,7 @@
                         })
                         .catch(err => {
                             console.error(err);
-                            alert('Failed to generate quote:\n\n' + err.message);
+                            alert('Failed to update quote:\n\n' + err.message);
                             submitBtn.disabled = false;
                             submitBtn.innerHTML = 'Generate/Update Proposal';
                         });
