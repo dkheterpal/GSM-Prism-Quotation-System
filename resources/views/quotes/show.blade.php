@@ -36,7 +36,6 @@
                             $statusClass = 'bg-slate-100 text-slate-600 border-slate-200';
                             $statusStr = strtolower($quote->status);
                             if ($statusStr === 'active') $statusClass = 'bg-emerald-50 text-emerald-600 border-emerald-200';
-                            elseif ($statusStr === 'draft') $statusClass = 'bg-amber-50 text-amber-600 border-amber-200';
                             elseif ($statusStr === 'sent') $statusClass = 'bg-blue-50 text-blue-600 border-blue-200';
                             elseif ($statusStr === 'accepted') $statusClass = 'bg-green-50 text-green-700 border-green-200';
                             elseif ($statusStr === 'rejected') $statusClass = 'bg-red-50 text-red-600 border-red-200';

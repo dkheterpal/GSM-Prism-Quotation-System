@@ -24,6 +24,25 @@ class QuoteController extends Controller
             }
         }
 
+        $search = $request->input('search');
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('customer_name', 'LIKE', "%{$search}%")
+                    ->orWhere('company_name', 'LIKE', "%{$search}%")
+                    ->orWhere('email', 'LIKE', "%{$search}%")
+                    ->orWhere('phone', 'LIKE', "%{$search}%")
+                    ->orWhere('address', 'LIKE', "%{$search}%")
+                    ->orWhere('city', 'LIKE', "%{$search}%")
+                    ->orWhere('state', 'LIKE', "%{$search}%")
+                    ->orWhere('quote_number', 'LIKE', "%{$search}%")
+                    ->orWhereHas('items.product', function ($qProduct) use ($search) {
+                        $qProduct->where('name', 'LIKE', "%{$search}%")
+                            ->orWhere('description', 'LIKE', "%{$search}%")
+                            ->orWhere('deliverables', 'LIKE', "%{$search}%");
+                    });
+            });
+        }
+
         $quotes = $query->paginate(5)->withQueryString();
 
         return view('quotes.index', compact('quotes', 'currentStatus'));
@@ -183,11 +202,29 @@ class QuoteController extends Controller
         return response()->json(['success' => true, 'redirect' => route('quotes.index')]);
     }
 
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate(['status' => 'required|string']);
+        $quote = Quote::withTrashed()->findOrFail($id);
+        $quote->update(['status' => $request->status]);
+
+        return back()->with('success', 'Quote status updated.');
+    }
+
+    public function updateNotes(Request $request, $id)
+    {
+        $request->validate(['notes' => 'nullable|string']);
+        $quote = Quote::withTrashed()->findOrFail($id);
+        $quote->update(['notes' => $request->notes]);
+
+        return back()->with('success', 'Quote notes updated.');
+    }
+
     public function destroy($id)
     {
         $quote = Quote::findOrFail($id);
         $quote->delete();
-        return redirect()->route('quotes.index', ['status' => 'active'])->with('success', 'Quote moved to deleted correctly.');
+        return redirect()->route('quotes.index', ['status' => 'Active'])->with('success', 'Quote moved to deleted correctly.');
     }
 
     public function restore($id)
@@ -196,7 +233,7 @@ class QuoteController extends Controller
         $quote->restore();
         // optionally reset status back to active when restored?
         $quote->update(['status' => 'Active']);
-        return redirect()->route('quotes.index', ['status' => 'deleted'])->with('success', 'Quote restored successfully.');
+        return redirect()->route('quotes.index', ['status' => 'Active'])->with('success', 'Quote restored successfully.');
     }
 
     public function download($id)

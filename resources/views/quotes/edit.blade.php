@@ -97,7 +97,6 @@
                         <select name="status"
                             class="w-full rounded-lg border-slate-200 shadow-sm focus:border-brand-500 focus:ring-brand-500 py-2.5 px-4 transition-all duration-200 bg-white">
                             <option value="Active" {{ $quote->status === 'Active' ? 'selected' : '' }}>Active</option>
-                            <option value="Draft" {{ $quote->status === 'Draft' ? 'selected' : '' }}>Draft</option>
                             <option value="Sent" {{ $quote->status === 'Sent' ? 'selected' : '' }}>Sent</option>
                             <option value="Accepted" {{ $quote->status === 'Accepted' ? 'selected' : '' }}>Accepted</option>
                             <option value="Rejected" {{ $quote->status === 'Rejected' ? 'selected' : '' }}>Rejected</option>
