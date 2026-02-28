@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Hotwire Turbo (Instant SPA Navigation) -->
+    <script src="https://unpkg.com/@hotwired/turbo@7.3.0/dist/turbo.es2017-umd.js"></script>
 
     <script>
         tailwind.config = {
@@ -117,7 +119,7 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    document.getElementById('delete-form-' + id).submit();
+                    document.getElementById('delete-form-' + id).requestSubmit();
                 }
             })
         }
@@ -133,7 +135,7 @@
                 confirmButtonText: 'Yes, restore it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    document.getElementById('restore-form-' + id).submit();
+                    document.getElementById('restore-form-' + id).requestSubmit();
                 }
             })
         }

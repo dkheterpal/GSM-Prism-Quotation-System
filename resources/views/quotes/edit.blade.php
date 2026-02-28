@@ -102,12 +102,22 @@
                             <option value="Rejected" {{ $quote->status === 'Rejected' ? 'selected' : '' }}>Rejected</option>
                         </select>
                     </div>
-                    <div class="md:col-span-1">
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Internal Notes (Optional)</label>
-                        <textarea name="notes" rows="3"
-                            class="w-full rounded-lg border-slate-200 shadow-sm focus:border-brand-500 focus:ring-brand-500 py-2.5 px-4 transition-all duration-200 bg-white"
-                            placeholder="Add any internal notes about this quote...">{{ old('notes', $quote->notes) }}</textarea>
-                    </div>
+                    <input type="hidden" name="notes" id="hidden_notes_grid"
+                        value="{{ old('notes', $quote->notes ?? '') }}">
+                </div>
+            </div>
+
+            <!-- Internal Notes Section -->
+            <div class="p-8 border-b border-slate-100 bg-amber-50/30">
+                <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-3">
+                    <div class="w-8 h-8 rounded bg-amber-100 text-amber-600 flex items-center justify-center text-sm"><i
+                            class="fa-solid fa-note-sticky"></i></div> Internal Private Notes
+                </h3>
+                <div>
+                    <textarea name="notes" rows="4"
+                        onchange="document.getElementById('hidden_notes_grid').value = this.value"
+                        class="w-full rounded-xl border-amber-200 shadow-sm focus:border-amber-500 focus:ring-amber-500 py-3 px-4 transition-all duration-200 bg-white text-slate-700 font-medium placeholder:text-slate-400"
+                        placeholder="These notes are invisible to the customer and will NOT appear on the final PDF. Use this space for pricing rationale, discounts given, or general tracking...">{{ old('notes', $quote->notes) }}</textarea>
                 </div>
             </div>
 
@@ -154,7 +164,7 @@
                     <div class="relative">
                         <select name="items[__INDEX__][product_id]" required
                             class="product-select appearance-none w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-lg focus:ring-brand-500 focus:border-brand-500 block p-2.5 font-medium transition-colors">
-                            <option value="">-- Choose Product --</option>
+                            <option value="" disabled selected>-- Choose Product --</option>
                         </select>
                         <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400">
                             <i class="fa-solid fa-chevron-down text-xs"></i>
@@ -172,7 +182,7 @@
                         <select name="items[__INDEX__][price_id]" required
                             class="price-select appearance-none w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-lg focus:ring-brand-500 focus:border-brand-500 block p-2.5 font-medium transition-colors disabled:opacity-50 disabled:bg-slate-100"
                             disabled>
-                            <option value="">-- Select Product First --</option>
+                            <option value="" disabled selected>-- Select Product First --</option>
                         </select>
                         <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400">
                             <i class="fa-solid fa-chevron-down text-xs"></i>
@@ -199,7 +209,7 @@
 
     @push('scripts')
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('turbo:load', function () {
                 let itemIndex = 0;
                 const container = document.getElementById('items-container');
                 const template = document.getElementById('item-template');
@@ -422,7 +432,11 @@
                         })
                         .then(res => {
                             if (res.success) {
-                                window.location.href = res.redirect;
+                                if (window.Turbo) {
+                                    window.Turbo.visit(res.redirect);
+                                } else {
+                                    window.location.href = res.redirect;
+                                }
                             } else {
                                 alert('Something went wrong. Check inputs.');
                                 submitBtn.disabled = false;

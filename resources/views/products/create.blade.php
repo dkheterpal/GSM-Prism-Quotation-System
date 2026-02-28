@@ -138,10 +138,22 @@
             }
         </style>
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                document.querySelectorAll('.wysiwyg').forEach(el => {
-                    ClassicEditor.create(el).catch(error => console.error(error));
-                });
+            document.addEventListener('turbo:load', function () {
+                const initEditor = () => {
+                    if (typeof ClassicEditor !== 'undefined') {
+                        document.querySelectorAll('.wysiwyg').forEach(el => {
+                            // Only init if not already initialized
+                            if (!el.classList.contains('ck-initialized')) {
+                                ClassicEditor.create(el).then(editor => {
+                                    el.classList.add('ck-initialized');
+                                }).catch(error => console.error(error));
+                            }
+                        });
+                    } else {
+                        setTimeout(initEditor, 100);
+                    }
+                };
+                initEditor();
 
                 let priceIndex = 0;
                 const container = document.getElementById('prices-container');

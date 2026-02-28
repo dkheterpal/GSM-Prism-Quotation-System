@@ -142,7 +142,7 @@
                                             class="inline-block relative">
                                             @csrf
                                             @method('PATCH')
-                                            <select name="status" onchange="this.form.submit()"
+                                            <select name="status" onchange="this.form.requestSubmit()"
                                                 class="capitalize {{ $statusClass }} border rounded-full pl-3 pr-7 py-1 text-xs font-bold tracking-wide shadow-sm appearance-none outline-none cursor-pointer focus:ring-2 focus:ring-brand-500 transition-all">
                                                 <option value="Active" {{ $statusStr === 'active' ? 'selected' : '' }}>Active</option>
                                                 <option value="Sent" {{ $statusStr === 'sent' ? 'selected' : '' }}>Sent</option>
