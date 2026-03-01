@@ -27,7 +27,7 @@
 
         <div class="bg-white p-8 md:p-12 border border-slate-200 shadow-xl shadow-slate-200/50 rounded-2xl mb-10 print:shadow-none print:border-none print:p-0">
             <!-- Header -->
-            <div class="flex justify-between items-start border-b-2 border-slate-900 pb-6 mb-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-start gap-6 border-b-2 border-slate-900 pb-6 mb-8">
                 <div>
                     <h1 class="text-4xl font-bold text-slate-900 mb-2">Proposal</h1>
                     <div class="flex items-center gap-3">
@@ -47,10 +47,10 @@
                     </div>
                     <p class="text-slate-400 mt-2">Date: {{ $quote->created_at->format('F j, Y') }}</p>
                 </div>
-                <div class="text-right">
+                <div class="w-full sm:w-auto text-left sm:text-right">
                     <h3 class="text-xs uppercase tracking-widest font-bold text-slate-400 mb-2">Submitted To</h3>
                     @if($quote->company_logo)
-                        <img src="{{ url($quote->company_logo) }}" class="max-h-12 mb-2 object-contain ml-auto">
+                        <img src="{{ url($quote->company_logo) }}" class="max-h-12 mb-2 object-contain sm:ml-auto">
                     @endif
                     <p class="font-bold text-lg text-slate-900">{{ $quote->company_name ?: 'Company' }}</p>
                     <p class="text-slate-700 font-medium">c/o {{ $quote->customer_name }}</p>

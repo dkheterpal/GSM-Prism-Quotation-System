@@ -73,26 +73,51 @@
 </head>
 
 <body class="min-h-screen bg-slate-50 flex flex-col">
-    <nav class="sticky top-0 z-50 glass shadow-sm py-4 border-b border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-3 items-center">
-            <div class="flex items-center justify-start">
+    <nav class="sticky top-0 z-50 glass shadow-sm py-3 sm:py-4 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center bg-transparent gap-2">
+            <!-- Left: Mobile Toggle & Logo -->
+            <div class="flex items-center justify-start shrink-0">
+                <button type="button" id="mobile-menu-btn" class="sm:hidden mr-4 text-slate-600 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-200 rounded p-1 transition-colors">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
                 <img src="{{ url('/images/products/image11.png') }}" alt="Sphere Global"
-                    class="h-10 hover:opacity-90 transition-opacity">
+                    class="h-8 sm:h-10 hover:opacity-90 transition-opacity">
             </div>
-            <div class="flex flex-col items-center justify-center text-center">
+
+            <!-- Center: App Title (Hidden on tiny mobile) -->
+            <div class="hidden md:flex flex-col items-center justify-center text-center flex-1">
                 <h1 class="text-xl font-bold text-slate-900 tracking-tight">PRISM</h1>
                 <p class="text-[10px] sm:text-xs text-slate-600 font-bold tracking-widest uppercase">Proposal System</p>
             </div>
-            <div class="flex items-center justify-end gap-3 sm:gap-4">
+
+            <!-- Right: Action Links -->
+            <div class="flex items-center justify-end gap-2 sm:gap-4 shrink-0">
                 <a href="{{ route('products.index') }}"
                     class="hidden sm:block text-slate-500 hover:text-slate-900 font-medium transition-colors px-2 py-2">Products</a>
                 <a href="{{ route('quotes.index') }}"
                     class="hidden sm:block text-slate-500 hover:text-slate-900 font-medium transition-colors px-2 py-2">Quotes</a>
                 <a href="{{ route('quotes.create') }}"
-                    class="bg-slate-900 hover:bg-slate-800 text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-sm font-semibold transition-all shadow-md hover:shadow-lg flex items-center gap-2">
+                    class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg text-sm font-semibold transition-all shadow-md hover:shadow-lg flex items-center gap-2 whitespace-nowrap">
                     <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">New Quote</span>
                 </a>
             </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white border-t border-slate-200 shadow-2xl z-50 transition-all duration-200 flex-col sm:hidden pb-2">
+            <div class="px-4 py-4 flex flex-col items-center text-center border-b border-slate-100 bg-slate-50 md:hidden">
+                 <h1 class="text-xl font-bold text-slate-900 tracking-tight leading-tight">PRISM</h1>
+                 <p class="text-[10px] text-slate-500 font-bold tracking-widest uppercase">Proposal System</p>
+            </div>
+            <a href="{{ route('products.index') }}" class="flex items-center w-full px-6 py-4 border-b border-slate-100 text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-brand-600 active:bg-slate-100 transition-colors">
+                <i class="fa-solid fa-box-open w-8 text-center text-slate-400 mr-2 text-lg"></i> Products
+            </a>
+            <a href="{{ route('quotes.index') }}" class="flex items-center w-full px-6 py-4 border-b border-slate-100 text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-brand-600 active:bg-slate-100 transition-colors">
+                <i class="fa-solid fa-file-invoice-dollar w-8 text-center text-slate-400 mr-2 text-lg"></i> Quotes
+            </a>
+            <a href="{{ route('quotes.create') }}" class="flex items-center w-full px-6 py-4 text-base font-bold text-brand-600 hover:bg-slate-50 active:bg-slate-100 transition-colors">
+                <i class="fa-solid fa-plus-circle w-8 text-center text-brand-400 mr-2 text-lg"></i> Create New Quote
+            </a>
         </div>
     </nav>
 
@@ -139,6 +164,37 @@
                 }
             })
         }
+
+        // Initialize mobile menu safely across Turbo navigation events
+        document.addEventListener('turbo:load', function() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            
+            if (btn && menu) {
+                // Remove existing listeners by cloning (prevents double toggle on quick navigation)
+                const newBtn = btn.cloneNode(true);
+                btn.parentNode.replaceChild(newBtn, btn);
+                
+                newBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (menu.classList.contains('hidden')) {
+                        menu.classList.remove('hidden');
+                        menu.classList.add('flex');
+                    } else {
+                        menu.classList.add('hidden');
+                        menu.classList.remove('flex');
+                    }
+                });
+
+                // Auto-close menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!menu.contains(e.target) && !newBtn.contains(e.target) && !menu.classList.contains('hidden')) {
+                        menu.classList.add('hidden');
+                        menu.classList.remove('flex');
+                    }
+                });
+            }
+        });
     </script>
 </body>
 
